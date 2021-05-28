@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="book-header">
+                <span>Books</span>
+            </div>
+            <div class="row">
+                
+                <!-- loop over the collection of products -->
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div  *ngIf="tempProduct.unitsInStock == 0; else elsecondition">
+                        <div class="product-box">
+                            <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
+                            <h1>{{ tempProduct.name }}</h1>
+                            <div class="price">Out of Stock</div>
+                            <button class="ternary-btn" [disabled]='!tempProduct.unitsInStock'>Add to cart</button>
+                            <!--<a href="#" class="ternary-btn">WishList</a>-->
+                            <a href="#" class="secondary-btn">WishList</a>
+                        </div>
+                    </div>
+                    <ng-template  #elsecondition>
+                        <div class="product-box">
+                            <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
+                            <h1>{{ tempProduct.name }}</h1>
+                            <div class="price">{{ tempProduct.unitPrice | currency:'INR' }}</div>
+                            <button (click)="addToCart(tempProduct)" class="primary-btn">Add to cart</button>
+                            <!--<button class="primary-btn" 
+                                (click)="enableDisableRule()" 
+                                [ngClass]="{'green' : toggle, 'red': !toggle}">
+                                {{status}}
+                            </button>-->
+                            <a href="#" class="secondary-btn">WishList</a>
+                        </div>
+                      </ng-template>
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
